@@ -21,4 +21,4 @@ Web Performance Optimization Kit is a collection of tools that aims on automatin
 
 ### Dependencies
 - Apache Web Server
-- PHP 5.5.x or Later
+- PHP 5.5.x
