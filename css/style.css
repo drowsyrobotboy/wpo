@@ -1,0 +1,53 @@
+body {
+  border: none;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background: #eee;
+  color: #555;
+}
+
+.wrapper {
+  width: 900px;
+  margin: 20px auto;
+}
+
+.logo {
+  width: 600px;
+  margin: auto;
+}
+
+.content {
+  background: #efefef;
+  -webkit-box-shadow: 0 0 3px #bbb;
+  box-shadow: 0 0 3px #bbb;
+  padding: 20px;
+}
+
+.button a {
+  background: #90A30C;
+  color: #efefef;
+  text-decoration: none;
+  padding: 10px 20px;
+}
+
+.da-table {
+  background: #ddd;
+}
+
+.da-header td {
+  background: #90A30C;
+}
+
+.da-folder td {
+    background: #d1d6a8;
+}
+
+.da-folder td h4 {
+  padding: 0px;
+    margin:0px;
+}
+
+.da-file td {
+  background: #efefef;
+}
