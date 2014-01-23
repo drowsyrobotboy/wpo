@@ -21,7 +21,7 @@ param2 in wpo_detect() method uses the following values to detect a particular t
 include('header.php'); 
 
 //creating the wpo_temp directory to store temporary files through out the process
-if(!mkdir("../wpo_temp")) {
+if(!mkdir("temp")) {
 	die("<h1>Error in creating Temporary Storage Module</h1>");
 }
 
@@ -69,10 +69,10 @@ function wpo_files($dir,$param2) {
 		if(glob($dir.'/{*.php,*.php3,*.phtml}', GLOB_BRACE)){echo "<tr class='da-folder'><td colspan='2'><h4>".$dir."</h4></td></tr>";}
 		foreach (glob($dir.'/{*.php,*.php3,*.phtml}', GLOB_BRACE) as $filename) {
 		echo "<tr class='da-file'><td>$filename</td><td>" . filesize($filename) . "</td></tr>";
-		file_put_contents("../wpo_temp/php.xml","<file>\n\t<path>".$filename."</path>\n\t<size>".filesize($filename)."</size>\n\t<rlist>\n", FILE_APPEND);
-		$no = wpo_detect_image($filename,"../wpo_temp/php.xml");
-		if($no>0) {file_put_contents("../wpo_temp/php.xml","\t</rlist>\n</file>\n", FILE_APPEND);file_put_contents("../wpo_temp/add-weppy.xml","<file>".$filename."<file>\n", FILE_APPEND);}
-		else {file_put_contents("../wpo_temp/php.xml","\t\t none \n\t</rlist>\n</file>\n", FILE_APPEND);}
+		file_put_contents("temp/php.xml","<file>\n\t<path>".$filename."</path>\n\t<size>".filesize($filename)."</size>\n\t<rlist>\n", FILE_APPEND);
+		$no = wpo_detect_image($filename,"temp/php.xml");
+		if($no>0) {file_put_contents("temp/php.xml","\t</rlist>\n</file>\n", FILE_APPEND);file_put_contents("temp/add-weppy.xml","<file>".$filename."<file>\n", FILE_APPEND);}
+		else {file_put_contents("temp/php.xml","\t\t none \n\t</rlist>\n</file>\n", FILE_APPEND);}
 		}
 		wpo_dir($dir,1);
 		break;
@@ -81,10 +81,10 @@ function wpo_files($dir,$param2) {
 		if(glob($dir.'/*.js')){echo "<tr class='da-folder'><td colspan='2'><h4>".$dir."</h4></td></tr>";}
 		foreach (glob($dir.'/*.js') as $filename) {
 		echo "<tr class='da-file'><td>$filename</td><td>" . filesize($filename) . "</td></tr>";
-		file_put_contents("../wpo_temp/js.xml","<file>\n\t<path>".$filename."</path>\n\t<size>".filesize($filename)."</size>\n\t<rlist>\n", FILE_APPEND);
-		$no = wpo_detect_image($filename,"../wpo_temp/js.xml");
-		if($no>0) {file_put_contents("../wpo_temp/js.xml","\t</rlist>\n</file>\n", FILE_APPEND);file_put_contents("../wpo_temp/add-weppy.xml","<file>".$filename."<file>\n", FILE_APPEND);}
-		else {file_put_contents("../wpo_temp/js.xml","\t\t none \n\t</rlist>\n</file>\n", FILE_APPEND);}
+		file_put_contents("temp/js.xml","<file>\n\t<path>".$filename."</path>\n\t<size>".filesize($filename)."</size>\n\t<rlist>\n", FILE_APPEND);
+		$no = wpo_detect_image($filename,"temp/js.xml");
+		if($no>0) {file_put_contents("temp/js.xml","\t</rlist>\n</file>\n", FILE_APPEND);file_put_contents("temp/add-weppy.xml","<file>".$filename."<file>\n", FILE_APPEND);}
+		else {file_put_contents("temp/js.xml","\t\t none \n\t</rlist>\n</file>\n", FILE_APPEND);}
 		}
 		wpo_dir($dir,2);
 		break;
@@ -93,10 +93,10 @@ function wpo_files($dir,$param2) {
 		if(glob($dir.'/*.css')){echo "<tr class='da-folder'><td colspan='2'><h4>".$dir."</h4></td></tr>";}
 		foreach (glob($dir.'/*.css') as $filename) {
 		echo "<tr class='da-file'><td>$filename</td><td>" . filesize($filename) . "</td></tr>";
-		file_put_contents("../wpo_temp/css.xml","<file>\n\t<path>".$filename."</path>\n\t<size>".filesize($filename)."</size>\n\t<rlist>\n", FILE_APPEND);
-		$no = wpo_detect_image($filename,"../wpo_temp/css.xml");
-		if($no>0) {file_put_contents("../wpo_temp/css.xml","\t</rlist>\n</file>\n", FILE_APPEND);file_put_contents("../wpo_temp/add-weppy.xml","<file>".$filename."<file>\n", FILE_APPEND);}
-		else {file_put_contents("../wpo_temp/css.xml","\t\t none \n\t</rlist>\n</file>\n", FILE_APPEND);}
+		file_put_contents("temp/css.xml","<file>\n\t<path>".$filename."</path>\n\t<size>".filesize($filename)."</size>\n\t<rlist>\n", FILE_APPEND);
+		$no = wpo_detect_image($filename,"temp/css.xml");
+		if($no>0) {file_put_contents("temp/css.xml","\t</rlist>\n</file>\n", FILE_APPEND);file_put_contents("temp/add-weppy.xml","<file>".$filename."<file>\n", FILE_APPEND);}
+		else {file_put_contents("temp/css.xml","\t\t none \n\t</rlist>\n</file>\n", FILE_APPEND);}
 		}
 		wpo_dir($dir,3);
 		break;
@@ -105,10 +105,10 @@ function wpo_files($dir,$param2) {
 		if(glob($dir.'/{*.html,*.htm,*.shtml,*.shtm,*.xhtml}', GLOB_BRACE)){echo "<tr class='da-folder'><td colspan='2'><h4>".$dir."</h4></td></tr>";}
 		foreach (glob($dir.'/{*.html,*.htm,*.shtml,*.shtm,*.xhtml}', GLOB_BRACE) as $filename) {
 		echo "<tr class='da-file'><td>$filename</td><td>" . filesize($filename) . "</td></tr>";
-		file_put_contents("../wpo_temp/html.xml","<file>\n\t<path>".$filename."</path>\n\t<size>".filesize($filename)."</size>\n\t<rlist>\n", FILE_APPEND);
-		$no = wpo_detect_image($filename,"../wpo_temp/html.xml");
-		if($no>0) {file_put_contents("../wpo_temp/html.xml","\t</rlist>\n</file>\n", FILE_APPEND);file_put_contents("../wpo_temp/add-weppy.xml","<file>".$filename."<file>\n", FILE_APPEND);}
-		else {file_put_contents("../wpo_temp/html.xml","\t\t none \n\t</rlist>\n</file>\n", FILE_APPEND);}
+		file_put_contents("temp/html.xml","<file>\n\t<path>".$filename."</path>\n\t<size>".filesize($filename)."</size>\n\t<rlist>\n", FILE_APPEND);
+		$no = wpo_detect_image($filename,"temp/html.xml");
+		if($no>0) {file_put_contents("temp/html.xml","\t</rlist>\n</file>\n", FILE_APPEND);file_put_contents("temp/add-weppy.xml","<file>".$filename."<file>\n", FILE_APPEND);}
+		else {file_put_contents("temp/html.xml","\t\t none \n\t</rlist>\n</file>\n", FILE_APPEND);}
 		}
 		wpo_dir($dir,4);
 		break;
@@ -117,7 +117,7 @@ function wpo_files($dir,$param2) {
 		if(glob($dir.'/{*.jpg,*.png,*.gif,*.bmp,*.jpeg}', GLOB_BRACE)){echo "<tr class='da-folder'><td colspan='2'><h4>".$dir."</h4></td></tr>";}
 		foreach (glob($dir.'/{*.jpg,*.png,*.gif,*.bmp,*.jpeg}', GLOB_BRACE) as $filename) {
 		echo "<tr class='da-file'><td>$filename</td><td>" . filesize($filename) . "</td></tr>";
-		file_put_contents("../wpo_temp/img.xml","<file>\n\t<path>".$filename."</path>\n\t<size>".filesize($filename)."</size>\n</file>\n", FILE_APPEND);
+		file_put_contents("temp/img.xml","<file>\n\t<path>".$filename."</path>\n\t<size>".filesize($filename)."</size>\n</file>\n", FILE_APPEND);
 		}
 		wpo_dir($dir,5);
 		break;
@@ -126,10 +126,10 @@ function wpo_files($dir,$param2) {
 		foreach (glob($dir.'/*.*') as $filename) {
 		if((wpo_ext($filename)!="php")&&(wpo_ext($filename)!="php3")&&(wpo_ext($filename)!="phtml")&&(wpo_ext($filename)!="js")&&(wpo_ext($filename)!="css")&&(wpo_ext($filename)!="bmp")&&(wpo_ext($filename)!="jpg")&&(wpo_ext($filename)!="jpeg")&&(wpo_ext($filename)!="png")&&(wpo_ext($filename)!="gif")&&(wpo_ext($filename)!="html")&&(wpo_ext($filename)!="htm")&&(wpo_ext($filename)!="shtml")&&(wpo_ext($filename)!="shtm")&&(wpo_ext($filename)!="xhtml")) {
 			echo "<tr class='da-file'><td>$filename</td><td>" . filesize($filename) . "</td></tr>";
-			file_put_contents("../wpo_temp/exclude.xml","<file>\n\t<path>".$filename."</path>\n\t<size>".filesize($filename)."</size>\n\t<rlist>\n", FILE_APPEND);
-		$no = wpo_detect_image($filename,"../wpo_temp/exclude.xml");
-		if($no>0) {file_put_contents("../wpo_temp/exclude.xml","\t</rlist>\n</file>\n", FILE_APPEND);file_put_contents("../wpo_temp/add-weppy.xml","<file>".$filename."<file>\n", FILE_APPEND);}
-		else {file_put_contents("../wpo_temp/exclude.xml","\t\t none \n\t</rlist>\n</file>\n", FILE_APPEND);}
+			file_put_contents("temp/exclude.xml","<file>\n\t<path>".$filename."</path>\n\t<size>".filesize($filename)."</size>\n\t<rlist>\n", FILE_APPEND);
+		$no = wpo_detect_image($filename,"temp/exclude.xml");
+		if($no>0) {file_put_contents("temp/exclude.xml","\t</rlist>\n</file>\n", FILE_APPEND);file_put_contents("temp/add-weppy.xml","<file>".$filename."<file>\n", FILE_APPEND);}
+		else {file_put_contents("temp/exclude.xml","\t\t none \n\t</rlist>\n</file>\n", FILE_APPEND);}
 			}
 		}
 		wpo_dir($dir,6);
