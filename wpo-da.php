@@ -20,9 +20,34 @@ param2 in wpo_detect() method uses the following values to detect a particular t
 
 include('header.php'); 
 
-//creating the wpo_temp directory to store temporary files through out the process
-if(!mkdir("temp")) {
-	die("<h1>Error in creating Temporary Storage Module</h1>");
+function wpo_initial($dir)
+{
+	//creating the "temp" directory to store temporary files through out the process
+	if(!mkdir("temp")) {
+		die("<h1>Error in creating Temporary Storage Module</h1>");
+	}
+
+	//creating the "out" directory to store output files through out the process
+	if(!mkdir("out")) {
+		die("<h1>Error in creating output folder</h1>");
+	}
+	
+	//calling subfolders function
+	wpo_initialsub($dir);
+	
+}
+
+//creating initial subfolders
+function wpo_initialsub($dir){
+	foreach (glob($dir.'/*') as $value) {
+		if((is_dir($value))&&($value!="../wpo")){
+			$new_value = str_replace("..", "out", $value);
+			if(!mkdir($new_value)) {
+				die("<h1>Error in creating".$new_value."folder</h1>");
+			}
+			wpo_initialsub($value);
+		}
+	}
 }
 
 //creating initial files to store temporary data
@@ -69,6 +94,11 @@ function wpo_files($dir,$param2) {
 		if(glob($dir.'/{*.php,*.php3,*.phtml}', GLOB_BRACE)){echo "<tr class='da-folder'><td colspan='2'><h4>".$dir."</h4></td></tr>";}
 		foreach (glob($dir.'/{*.php,*.php3,*.phtml}', GLOB_BRACE) as $filename) {
 		echo "<tr class='da-file'><td>$filename</td><td>" . filesize($filename) . "</td></tr>";
+		// copy to out folder
+		$destination = str_replace("..", "out", $filename);
+		if(!copy($filename,$destination)) { die ("error in copying to output folder");}
+		
+		//add to xml file
 		file_put_contents("temp/php.xml","<file>\n\t<path>".$filename."</path>\n\t<size>".filesize($filename)."</size>\n\t<rlist>\n", FILE_APPEND);
 		$no = wpo_detect_image($filename,"temp/php.xml");
 		if($no>0) {file_put_contents("temp/php.xml","\t</rlist>\n</file>\n", FILE_APPEND);file_put_contents("temp/add-weppy.xml","<file>".$filename."<file>\n", FILE_APPEND);}
@@ -147,55 +177,51 @@ function wpo_dir($dir,$param2) {
 	}
 }
 
-//final function to detect
-function wpo_detect($dir,$param2) {
-	//list files of the $dir first
-	wpo_files($dir,$param2);
-	//traverse sub-directories
-	wpo_dir($dir,$param2);
-}
+
 ?>
+<!-- Create initial directories -->
+<?php wpo_initial(".."); ?>
 
 <!-- Listing all HTML files-->
 <h2>The following HTML files will be Optimized</h2>
 <table class="da-table" width="100%" cellpadding="10px">
 <tr class='da-header'><td>Filename</td><td>File Size (in Bytes) </td></tr>
-<?php wpo_detect("..",4); ?>
+<?php wpo_files("..",4); ?>
 </table>
 
 <!-- Listing all PHP files-->
 <h2>The following PHP files will be Optimized</h2>
 <table class="da-table" width="100%" cellpadding="10px">
 <tr class='da-header'><td>Filename</td><td>File Size (in Bytes) </td></tr>
-<?php wpo_detect("..",1); ?>
+<?php wpo_files("..",1); ?>
 </table>
 
 <!-- Listing all JS files-->
 <h2>The following JS files will be Optimized</h2>
 <table class="da-table" width="100%" cellpadding="10px">
 <tr class='da-header'><td>Filename</td><td>File Size (in Bytes) </td></tr>
-<?php wpo_detect("..",2); ?>
+<?php wpo_files("..",2); ?>
 </table>
 
 <!-- Listing all CSS files-->
 <h2>The following CSS files will be Optimized</h2>
 <table class="da-table" width="100%" cellpadding="10px">
 <tr class='da-header'><td>Filename</td><td>File Size (in Bytes) </td></tr>
-<?php wpo_detect("..",3); ?>
+<?php wpo_files("..",3); ?>
 </table>
 
 <!-- Listing all Images-->
 <h2>The following Images will be Optimized</h2>
 <table class="da-table" width="100%" cellpadding="10px">
 <tr class='da-header'><td>Filename</td><td>File Size (in Bytes) </td></tr>
-<?php wpo_detect("..",5); ?>
+<?php wpo_files("..",5); ?>
 </table>
 
 <!-- Listing all Other files-->
 <h2>The following files will NOT be Optimized</h2>
 <table class="da-table" width="100%" cellpadding="10px">
 <tr class='da-header'><td>Filename</td><td>File Size (in Bytes) </td></tr>
-<?php wpo_detect("..",6); ?>
+<?php wpo_files("..",6); ?>
 </table>
 
 <br /><br />
