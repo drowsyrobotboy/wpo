@@ -1,4 +1,4 @@
-![The Web Performance Optimization Kit Logo](https://bitbucket.org/maruthip25/wpo/raw/1f7e581f3eac7a8462bdac1ea46146db5fdaf620/images/logo.svg)
+![The Web Performance Optimization Kit Logo](https://bitbucket.org/maruthip25/wpo/raw/aa2db2704a2803ffdf401c70fbf98c2a16e3c79e/images/logo.svg)
 
 ---
 
