@@ -18,10 +18,31 @@ param2 in wpo_detect() method uses the following values to detect a particular t
 6-Other files
 =========================================================*/
 
-include('header.php'); 
+include('header.php');
 
-function wpo_initial($dir)
-{
+//function to create all XML files and open root element
+function wpo_openXMLs() {
+	file_put_contents("temp/php.xml","<wpo>\n", FILE_APPEND);
+	file_put_contents("temp/js.xml","<wpo>\n", FILE_APPEND);
+	file_put_contents("temp/css.xml","<wpo>\n", FILE_APPEND);
+	file_put_contents("temp/html.xml","<wpo>\n", FILE_APPEND);
+	file_put_contents("temp/img.xml","<wpo>\n", FILE_APPEND);
+	file_put_contents("temp/exclude.xml","<wpo>\n", FILE_APPEND);
+	file_put_contents("temp/add-weppy.xml","<wpo>\n", FILE_APPEND);
+}
+
+//function to close root element in all XML files
+function wpo_closeXMLs() {
+	file_put_contents("temp/php.xml","</wpo>", FILE_APPEND);
+	file_put_contents("temp/js.xml","</wpo>", FILE_APPEND);
+	file_put_contents("temp/css.xml","</wpo>", FILE_APPEND);
+	file_put_contents("temp/html.xml","</wpo>", FILE_APPEND);
+	file_put_contents("temp/img.xml","</wpo>", FILE_APPEND);
+	file_put_contents("temp/exclude.xml","</wpo>", FILE_APPEND);
+	file_put_contents("temp/add-weppy.xml","</wpo>", FILE_APPEND);
+}
+
+function wpo_initial($dir) {
 	//creating the "temp" directory to store temporary files through out the process
 	if(!mkdir("temp")) {
 		die("<h1>Error in creating Temporary Storage Module</h1>");
@@ -194,6 +215,9 @@ function wpo_dir($dir,$param2) {
 <!-- Create initial directories -->
 <?php wpo_initial(".."); ?>
 
+<!-- Create XML files -->
+<?php wpo_openXMLs(); ?>
+
 <!-- Listing all HTML files-->
 <h2>The following HTML files will be Optimized</h2>
 <table class="da-table" width="100%" cellpadding="10px">
@@ -237,7 +261,9 @@ function wpo_dir($dir,$param2) {
 </table>
 
 <br /><br />
-<?php //wpo_detect_image("../postinfo.html"); ?>
+<!-- close XML files -->
+<?php wpo_closeXMLs(); ?>
+
 <div class="button" style="float:right;"><a href="wpo-da.php">Proceed to Next Step</a></div>
 
 <?php  include('footer.php'); ?>
