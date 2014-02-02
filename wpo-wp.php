@@ -27,39 +27,20 @@ function wpo_replace_links() {
 	return 1;
 }
 
+//function to convert given image to webp
+function wpo_webp($source, $destination) {
+	exec("cwebp ".$source." -o ".$destination. " -q 80"); // execute external command cwebp
+}
+
 //the main function
-function wpo_webp($dir) {
+function wpo_webp_main($dir) {
 	wpo_addweppy(); // function to add the weppy.js fille to all files listed in add-weppy.xml file
 	$wp_list = wpo_read($dir); // array with SimpleXMLObjects in XML file
 	foreach($wp_list as $value) {
 		$path = str_replace("..", "out", $value->path);// path to destination file in "out" folder 
-		switch(pathinfo($path, PATHINFO_EXTENSION)) {
-			case "jpg": {
-				unlink($path); //delete unconverted image file in out folder
-				$path = str_replace("jpg", "webp", $path); // prepeare destination file with .webp extension
-				imagewebp(imagecreatefromjpeg($value->path), $path);
-				break;
-			}
-			case "jpeg": {
-				unlink($path); //delete unconverted image file in out folder
-				$path = str_replace("jpeg", "webp", $path); // prepeare destination file with .webp extension
-				imagewebp(imagecreatefromjpeg($value->path), $path);
-				break;
-			}
-			case "png": {
-				unlink($path); //delete unconverted image file in out folder
-				$path = str_replace("png", "webp", $path); // prepeare destination file with .webp extension
-				imagewebp(imagecreatefrompng($value->path), $path);
-				break;
-			}
-			case "gif": {
-				unlink($path); //delete unconverted image file in out folder
-				$path = str_replace("gif", "webp", $path); // prepeare destination file with .webp extension
-				imagewebp(imagecreatefromgif($value->path), $path);
-				break;
-			}
-			default: { die ("Unknown Image Extension added to XML file"); break; }
-		}
+		unlink($path); //delete unconverted image file in out folder
+		$path = str_replace(pathinfo($path, PATHINFO_EXTENSION), "webp", $path); // prepeare destination file with .webp extension
+		wpo_webp($value->path, $path);
 	}
 	wpo_replace_links(); //function to replace local image extensions with .webp extension
 }

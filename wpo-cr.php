@@ -53,6 +53,6 @@ wpo_reorg("temp/js.xml");
 wpo_reorg("temp/css.xml");
 
 //calling webP module
-wpo_webp("temp/img.xml");
+wpo_webp_main("temp/img.xml");
 
 include('footer.php'); ?>
