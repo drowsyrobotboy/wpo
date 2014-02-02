@@ -7,7 +7,7 @@ This Module reorganises the code to reduce the file size
 -------------------------------
 Changelog
 -------------------------------
-01/02 - Removes new-lines and multiple blank spaces
+01/02 - Removes new-lines and multiple blank spaces and comments
 -------------------------------
 Important Notes
 -------------------------------
@@ -15,6 +15,8 @@ Important Notes
 =========================================================*/
 
 include('header.php'); 
+
+include('wpo-wp.php'); // link to webp implementation module
 
 //function that removes comments and replaces with one blank character
 function wpo_remcomments($path) {
@@ -32,13 +34,7 @@ function wpo_remspaces($path) {
 	file_put_contents($path,$contents);// copy contents to destination file
 }
 
-//function that reads xml file and returns array of SimpleXMLObjects
-function wpo_read($dir) {
-	$xml = simplexml_load_file($dir); // load the xml file
-	$list = array(); // create an empty array for SimpleXMLObjects
-	$list = array_merge($list, $xml->xpath("/wpo/file")); // add paths of files to $list array
-	return $list; //return the array
-}
+// IMPORTANT wpo_read() function has been moved to wpo_wp.php module
 
 //function that invokes all reorganisation functions
 function wpo_reorg($dir) {
@@ -55,5 +51,8 @@ function wpo_reorg($dir) {
 wpo_reorg("temp/php.xml"); 
 wpo_reorg("temp/js.xml");
 wpo_reorg("temp/css.xml");
+
+//calling webP module
+wpo_webp("temp/img.xml");
 
 include('footer.php'); ?>
