@@ -74,5 +74,8 @@ function wpo_replace_links($dir) {
 
 wpo_addwebpjs(); //call the addwebpjs function
 wpo_replace_links("temp/php.xml"); // now replace resource references in all php files
+wpo_replace_links("temp/html.xml"); // now replace resource references in all html files
+wpo_replace_links("temp/css.xml"); // now replace resource references in all css files
+wpo_replace_links("temp/js.xml"); // now replace resource references in all php files
 include('footer.php'); 
 ?>

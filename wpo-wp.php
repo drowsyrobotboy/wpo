@@ -9,6 +9,7 @@ Changelog
 -------------------------------
 version 1: directory under test contains 119 images and takes roughly 43 seconds to convert. 
 version 2: directory under test contains 119 images and takes roughly 33 seconds to convert. 
+version 3: different approach. png/gif are no more converted to webp. 
 
 Note: THE TIME TAKEN TO CONVERT CAN VARY BASED UPON THE FORMAT OF IMAGE PRESENT IN MAJORITY
 -------------------------------
