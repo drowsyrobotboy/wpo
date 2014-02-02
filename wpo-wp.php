@@ -28,7 +28,7 @@ function wpo_webp_main_old($dir) {
 		$path = str_replace("..", "out", $value->path);// path to destination file in "out" folder 
 		unlink($path); //delete unconverted image file in "out" folder
 		$path = str_replace(pathinfo($path, PATHINFO_EXTENSION), "webp", $path); // prepeare destination file with .webp extension
-		exec("cwebp ".$value->path." -o ".$path. " -q 80"); // execute external command cwebp to convert given image to webp
+		exec("cwebp ".$value->path." -o ".$path. " -q 100"); // execute external command cwebp to convert given image to webp
 	}
 }
 

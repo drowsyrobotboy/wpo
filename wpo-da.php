@@ -75,7 +75,7 @@ function wpo_initialsub($dir){
 function wpo_detect_image($path,$xml_path) {
 	$no_images=0;
 	$contents = file_get_contents($path);
-	$escape_quotes = array("\"","'","`"); //contains three types of qoutes to remove from $contents
+	$escape_quotes = array("\"","'","`","(",")"); //contains three types of qoutes to remove from $contents and brackets
 	$contents = str_replace($escape_quotes, " ", $contents); //replaces escape quotes with space
 	$contents = preg_replace('/\s+/', ' ', $contents); //removes whitespaces, tabs, and newlines
 	$list = explode(" ",$contents); //insert each string as an item in a new array 
@@ -109,7 +109,7 @@ function wpo_files($dir,$param2) {
 		//add to xml file
 		file_put_contents("temp/php.xml","<file>\n\t<path>".$filename."</path>\n\t<size>".filesize($filename)."</size>\n\t<rlist>\n", FILE_APPEND);
 		$no = wpo_detect_image($filename,"temp/php.xml");
-		if($no>0) {file_put_contents("temp/php.xml","\t</rlist>\n</file>\n", FILE_APPEND);file_put_contents("temp/add-weppy.xml","<file>".$filename."<file>\n", FILE_APPEND);}
+		if($no>0) {file_put_contents("temp/php.xml","\t</rlist>\n</file>\n", FILE_APPEND);file_put_contents("temp/add-weppy.xml","<file>".$filename."</file>\n", FILE_APPEND);}
 		else {file_put_contents("temp/php.xml","\t\t none \n\t</rlist>\n</file>\n", FILE_APPEND);}
 		}
 		wpo_dir($dir,1);
@@ -126,7 +126,7 @@ function wpo_files($dir,$param2) {
 		//add to xml file
 		file_put_contents("temp/js.xml","<file>\n\t<path>".$filename."</path>\n\t<size>".filesize($filename)."</size>\n\t<rlist>\n", FILE_APPEND);
 		$no = wpo_detect_image($filename,"temp/js.xml");
-		if($no>0) {file_put_contents("temp/js.xml","\t</rlist>\n</file>\n", FILE_APPEND);file_put_contents("temp/add-weppy.xml","<file>".$filename."<file>\n", FILE_APPEND);}
+		if($no>0) {file_put_contents("temp/js.xml","\t</rlist>\n</file>\n", FILE_APPEND);file_put_contents("temp/add-weppy.xml","<file>".$filename."</file>\n", FILE_APPEND);}
 		else {file_put_contents("temp/js.xml","\t\t none \n\t</rlist>\n</file>\n", FILE_APPEND);}
 		}
 		wpo_dir($dir,2);
@@ -143,7 +143,7 @@ function wpo_files($dir,$param2) {
 		//add to xml file
 		file_put_contents("temp/css.xml","<file>\n\t<path>".$filename."</path>\n\t<size>".filesize($filename)."</size>\n\t<rlist>\n", FILE_APPEND);
 		$no = wpo_detect_image($filename,"temp/css.xml");
-		if($no>0) {file_put_contents("temp/css.xml","\t</rlist>\n</file>\n", FILE_APPEND);file_put_contents("temp/add-weppy.xml","<file>".$filename."<file>\n", FILE_APPEND);}
+		if($no>0) {file_put_contents("temp/css.xml","\t</rlist>\n</file>\n", FILE_APPEND);file_put_contents("temp/add-weppy.xml","<file>".$filename."</file>\n", FILE_APPEND);}
 		else {file_put_contents("temp/css.xml","\t\t none \n\t</rlist>\n</file>\n", FILE_APPEND);}
 		}
 		wpo_dir($dir,3);
@@ -160,7 +160,7 @@ function wpo_files($dir,$param2) {
 		//add to xml file
 		file_put_contents("temp/html.xml","<file>\n\t<path>".$filename."</path>\n\t<size>".filesize($filename)."</size>\n\t<rlist>\n", FILE_APPEND);
 		$no = wpo_detect_image($filename,"temp/html.xml");
-		if($no>0) {file_put_contents("temp/html.xml","\t</rlist>\n</file>\n", FILE_APPEND);file_put_contents("temp/add-weppy.xml","<file>".$filename."<file>\n", FILE_APPEND);}
+		if($no>0) {file_put_contents("temp/html.xml","\t</rlist>\n</file>\n", FILE_APPEND);file_put_contents("temp/add-weppy.xml","<file>".$filename."</file>\n", FILE_APPEND);}
 		else {file_put_contents("temp/html.xml","\t\t none \n\t</rlist>\n</file>\n", FILE_APPEND);}
 		}
 		wpo_dir($dir,4);
@@ -191,7 +191,7 @@ function wpo_files($dir,$param2) {
 			//add to xml file
 			file_put_contents("temp/exclude.xml","<file>\n\t<path>".$filename."</path>\n\t<size>".filesize($filename)."</size>\n\t<rlist>\n", FILE_APPEND);
 			$no = wpo_detect_image($filename,"temp/exclude.xml");
-			if($no>0) {file_put_contents("temp/exclude.xml","\t</rlist>\n</file>\n", FILE_APPEND);file_put_contents("temp/add-weppy.xml","<file>".$filename."<file>\n", FILE_APPEND);}
+			if($no>0) {file_put_contents("temp/exclude.xml","\t</rlist>\n</file>\n", FILE_APPEND);file_put_contents("temp/add-weppy.xml","<file>".$filename."</file>\n", FILE_APPEND);}
 			else {file_put_contents("temp/exclude.xml","\t\t none \n\t</rlist>\n</file>\n", FILE_APPEND);}
 			}
 		}
