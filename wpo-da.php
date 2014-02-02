@@ -71,23 +71,23 @@ function wpo_initialsub($dir){
 	}
 }
 
-//function to detect images in a file and add it to its XML tag. Cannot simply replave .jpg,.png, etc . with .webp because the files may include hyperlinks which won't work after making them .webp. It also returns the count using which the calling func adds the file to add-webpjs.xml.
-function wpo_detect_image($path,$xml_path) {
-	$no_images=0;
+//function to detect images in a file and add it to its XML tag. Cannot simply replace .jpg with .webp because the files may include hyperlinks which won't work after making them .webp. It also returns the count using which the calling func adds the file to add-webpjs.xml.
+function wpo_detect_jpg_image($path,$xml_path) {
+	$no_jpg_images=0;
 	$contents = file_get_contents($path);
 	$escape_quotes = array("\"","'","`","(",")"); //contains three types of qoutes to remove from $contents and brackets
 	$contents = str_replace($escape_quotes, " ", $contents); //replaces escape quotes with space
 	$contents = preg_replace('/\s+/', ' ', $contents); //removes whitespaces, tabs, and newlines
 	$list = explode(" ",$contents); //insert each string as an item in a new array 
 	foreach( $list as $list_item) {
-		if(((wpo_ext($list_item)=="jpg")||(wpo_ext($list_item)=="jpeg")||(wpo_ext($list_item)=="png")||(wpo_ext($list_item)=="gif"))&&(preg_match("/^(http|https|ftp|ftps)\:\/\/*/", $list_item)==0))
+		if(((wpo_ext($list_item)=="jpg")||(wpo_ext($list_item)=="jpeg"))&&(preg_match("/^(http|https|ftp|ftps)\:\/\/*/", $list_item)==0))
 		{
 		//the above condition satisfies if the string is a reference to a local image
 		file_put_contents($xml_path,"\t\t<rname>".$list_item."</rname>\n", FILE_APPEND);
-		$no_images++;
+		$no_jpg_images++;
 		}
 	}
-	return $no_images;
+	return $no_jpg_images;
 }
 	
 //get extension of a file - used to extract "other" files
@@ -108,7 +108,7 @@ function wpo_files($dir,$param2) {
 		
 		//add to xml file
 		file_put_contents("temp/php.xml","<file>\n\t<path>".$filename."</path>\n\t<size>".filesize($filename)."</size>\n\t<rlist>\n", FILE_APPEND);
-		$no = wpo_detect_image($filename,"temp/php.xml");
+		$no = wpo_detect_jpg_image($filename,"temp/php.xml");
 		if($no>0) {file_put_contents("temp/php.xml","\t</rlist>\n</file>\n", FILE_APPEND);file_put_contents("temp/add-webpjs.xml","<file>".$filename."</file>\n", FILE_APPEND);}
 		else {file_put_contents("temp/php.xml","\t\t none \n\t</rlist>\n</file>\n", FILE_APPEND);}
 		}
@@ -125,7 +125,7 @@ function wpo_files($dir,$param2) {
 		
 		//add to xml file
 		file_put_contents("temp/js.xml","<file>\n\t<path>".$filename."</path>\n\t<size>".filesize($filename)."</size>\n\t<rlist>\n", FILE_APPEND);
-		$no = wpo_detect_image($filename,"temp/js.xml");
+		$no = wpo_detect_jpg_image($filename,"temp/js.xml");
 		if($no>0) {file_put_contents("temp/js.xml","\t</rlist>\n</file>\n", FILE_APPEND);file_put_contents("temp/add-webpjs.xml","<file>".$filename."</file>\n", FILE_APPEND);}
 		else {file_put_contents("temp/js.xml","\t\t none \n\t</rlist>\n</file>\n", FILE_APPEND);}
 		}
@@ -142,7 +142,7 @@ function wpo_files($dir,$param2) {
 		
 		//add to xml file
 		file_put_contents("temp/css.xml","<file>\n\t<path>".$filename."</path>\n\t<size>".filesize($filename)."</size>\n\t<rlist>\n", FILE_APPEND);
-		$no = wpo_detect_image($filename,"temp/css.xml");
+		$no = wpo_detect_jpg_image($filename,"temp/css.xml");
 		if($no>0) {file_put_contents("temp/css.xml","\t</rlist>\n</file>\n", FILE_APPEND);file_put_contents("temp/add-webpjs.xml","<file>".$filename."</file>\n", FILE_APPEND);}
 		else {file_put_contents("temp/css.xml","\t\t none \n\t</rlist>\n</file>\n", FILE_APPEND);}
 		}
@@ -159,7 +159,7 @@ function wpo_files($dir,$param2) {
 		
 		//add to xml file
 		file_put_contents("temp/html.xml","<file>\n\t<path>".$filename."</path>\n\t<size>".filesize($filename)."</size>\n\t<rlist>\n", FILE_APPEND);
-		$no = wpo_detect_image($filename,"temp/html.xml");
+		$no = wpo_detect_jpg_image($filename,"temp/html.xml");
 		if($no>0) {file_put_contents("temp/html.xml","\t</rlist>\n</file>\n", FILE_APPEND);file_put_contents("temp/add-webpjs.xml","<file>".$filename."</file>\n", FILE_APPEND);}
 		else {file_put_contents("temp/html.xml","\t\t none \n\t</rlist>\n</file>\n", FILE_APPEND);}
 		}
@@ -190,7 +190,7 @@ function wpo_files($dir,$param2) {
 		
 			//add to xml file
 			file_put_contents("temp/exclude.xml","<file>\n\t<path>".$filename."</path>\n\t<size>".filesize($filename)."</size>\n\t<rlist>\n", FILE_APPEND);
-			$no = wpo_detect_image($filename,"temp/exclude.xml");
+			$no = wpo_detect_jpg_image($filename,"temp/exclude.xml");
 			if($no>0) {file_put_contents("temp/exclude.xml","\t</rlist>\n</file>\n", FILE_APPEND);file_put_contents("temp/add-webpjs.xml","<file>".$filename."</file>\n", FILE_APPEND);}
 			else {file_put_contents("temp/exclude.xml","\t\t none \n\t</rlist>\n</file>\n", FILE_APPEND);}
 			}

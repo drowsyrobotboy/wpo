@@ -1,7 +1,7 @@
 <?php
 /*======================================================
 ----------------------------------------------------
-****** - The WebP Implementation Module - Part II **********
+****** - The Image optimization Module - Part II **********
 ----------------------------------------------------
 This Module replaces images references accordingly and also adds the webpjs.js file to the required files.
 -------------------------------
@@ -46,6 +46,7 @@ function wpo_addwebpjs() {
 		else { 
 			file_put_contents($path,$script,FILE_APPEND);
 		}
+		
 	}
 }
 
@@ -59,10 +60,12 @@ function wpo_replace_links($dir) {
 		else {
 			foreach($value->rlist->rname as $inner_value) { //for each rname element
 				$path = str_replace("..", "out", $value->path); // target file in "out" file
-				$contents = file_get_contents($path); // get contents of the target file
-				$changed_value = str_replace(pathinfo($inner_value, PATHINFO_EXTENSION), "webp", $inner_value); // prepare new image link
-				$contents = str_replace($inner_value, $changed_value, $contents); //replace image link
-				file_put_contents($path,$contents); // place new content in the target file
+				if(((pathinfo($inner_value, PATHINFO_EXTENSION)) == "jpg")||((pathinfo($inner_value, PATHINFO_EXTENSION)) == "jpeg")) {
+					$contents = file_get_contents($path); // get contents of the target file
+					$changed_value = str_replace(pathinfo($inner_value, PATHINFO_EXTENSION), "webp", $inner_value); // prepare new image link
+					$contents = str_replace($inner_value, $changed_value, $contents); //replace image link
+					file_put_contents($path,$contents); // place new content in the target file
+				}
 			}
 			
 		}

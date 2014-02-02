@@ -10,13 +10,13 @@ Web Performance Optimization Kit is a collection of tools that aims on automatin
 ### How?
 1. Restructure code using guidelines provided by developers communities os organizations like [Google](https://developers.google.com/speed/docs/best-practices/rules_intro) and [Yahoo](http://developer.yahoo.com/performance/rules.html).
 
-2. Implementing WebP format for images.
+2. Implementing WebP format for JPG images and optimization of PNG/GIF images.
 
 
 ### Modules:
 - Directory Analysis Module
 - Code Optimization Module
-- WebP Implementation Module
+- Image Optimization Module (earlier WebP Implementation Module)
 - Temporary Data Storage Module
 
 

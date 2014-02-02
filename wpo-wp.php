@@ -1,9 +1,9 @@
 <?php
 /*======================================================
 ----------------------------------------------------
-****** - The WebP Implementation Module - Part I **********
+****** - The Image optimization Module - Part I **********
 ----------------------------------------------------
-This Module converts image files to WebP format.
+This Module converts JPEG image files to WebP format and optimizes png/gif images.
 -------------------------------
 Changelog
 -------------------------------
@@ -38,17 +38,18 @@ function wpo_webp_main($dir) {
 	$wp_list = array(); // create an empty array for SimpleXMLObjects
 	$wp_list = array_merge($wp_list, $xml->xpath("/wpo/file")); // add paths of files to $list array
 	foreach($wp_list as $value) {
-		$path = str_replace("..", "out", $value->path);// path to destination file in "out" folder 
-		unlink($path); //delete unconverted image file in "out" folder
+		$path = str_replace("..", "out", $value->path);// path to destination file in "out" folder
+		if(((pathinfo($value->path, PATHINFO_EXTENSION)) == "jpg")||((pathinfo($value->path, PATHINFO_EXTENSION)) == "jpeg")) {
+		unlink($path); //delete unconverted jpg image file in "out" folder
 		$path = str_replace(pathinfo($path, PATHINFO_EXTENSION), "webp", $path); // prepeare destination file with .webp extension
 		/*let php - GD function handle jpg conversions */
-		if(((pathinfo($value->path, PATHINFO_EXTENSION)) == "jpg")||((pathinfo($value->path, PATHINFO_EXTENSION)) == "jpeg")) {
+		
 			imagewebp(imagecreatefromjpeg($value->path), $path);
 		}
-		/*cwebp tool handles png/gif conversions to preserve transparency and smoothness*/
+		/*//cwebp tool handles png/gif conversions to preserve transparency and smoothness
 		else { 
-			exec("cwebp ".$value->path." -o ".$path. " -q 80"); // execute external command cwebp to convert given image to webp
-		}
+			exec("cwebp ".$value->path." -o ".$path. " -q 100"); // execute external command cwebp to convert given image to webp
+		}*/
 	}
 }
 
