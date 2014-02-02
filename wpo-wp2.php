@@ -24,10 +24,10 @@ function wpo_addwebpjs() {
 	if(!copy("lib/webpjs-0.0.2.min.js","out/webpjs.js")) { die ("error in copying webpjs to output folder");} //copy webpjs.min.js file to "out" directory
 	$list = wpo_read('temp/add-webpjs.xml');
 	foreach($list as $value) {
-		/* escape js or css files as they don't need webpjs.js */
+		/* escape js or css files as they don't need webpjs.js ======= THESE ARE NO MORE ADDED TO ADD_WEBPJS.XML
 		if(((pathinfo($value, PATHINFO_EXTENSION)) == "js")||((pathinfo($value, PATHINFO_EXTENSION)) == "css")) {
 			continue;
-		}
+		}*/
 		$level = (substr_count($value,"/"))-1; //get the level of the file ... no of levels from the root directory
 		$path = str_replace("..", "out", $value); // path to target file
 		$script="<script src='";
