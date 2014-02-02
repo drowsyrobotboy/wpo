@@ -3,7 +3,7 @@
 ----------------------------------------------------
 ****** - The WebP Implementation Module - Part II **********
 ----------------------------------------------------
-This Module replaces images references accordingly and also adds the weppy.js file to the required files.
+This Module replaces images references accordingly and also adds the webpjs.js file to the required files.
 -------------------------------
 Important Notes
 -------------------------------
@@ -19,12 +19,12 @@ function wpo_read($dir) {
 	return $list; //return the array
 }
 
-//function to add the weppy.js fille to all files listed in add-weppy.xml file
-function wpo_addweppy() {
-	if(!copy("lib/weppy.js","out/weppy.js")) { die ("error in copying weppy to output folder");} //copy weppy.min.js file to "out" directory
-	$list = wpo_read('temp/add-weppy.xml');
+//function to add the webpjs.js fille to all files listed in add-webpjs.xml file
+function wpo_addwebpjs() {
+	if(!copy("lib/webpjs-0.0.2.min.js","out/webpjs.js")) { die ("error in copying webpjs to output folder");} //copy webpjs.min.js file to "out" directory
+	$list = wpo_read('temp/add-webpjs.xml');
 	foreach($list as $value) {
-		/* escape js or css files as they don't need weppy.js */
+		/* escape js or css files as they don't need webpjs.js */
 		if(((pathinfo($value, PATHINFO_EXTENSION)) == "js")||((pathinfo($value, PATHINFO_EXTENSION)) == "css")) {
 			continue;
 		}
@@ -35,7 +35,7 @@ function wpo_addweppy() {
 			$script.="../"; // place "../" for each level
 			$level--;
 		} 
-		$script.="weppy.js' type='text/javascript'></script>";
+		$script.="webpjs.js' type='text/javascript'></script>";
 		$contents = file_get_contents($path);
 		/* add script tag before body tag if body tag is found else (if file is a partial) place at the end of the file*/
 		if(stristr($contents, "</body>")) {
@@ -69,7 +69,7 @@ function wpo_replace_links($dir) {
 	}
 }
 
-wpo_addweppy(); //call the addweppy function
+wpo_addwebpjs(); //call the addwebpjs function
 wpo_replace_links("temp/php.xml"); // now replace resource references in all php files
 include('footer.php'); 
 ?>
