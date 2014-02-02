@@ -1,47 +1,61 @@
 <?php
 /*======================================================
 ----------------------------------------------------
-****** - The WebP Implementation Module - **********
+****** - The WebP Implementation Module - Part I **********
 ----------------------------------------------------
-THIS MODULE HAS NO VIEW. IT IS ONLY A COLLECTION OF FUNCTIONS. This Module converts image files to WebP format and replaces their references accordingly. This module also adds the weppy.js file to the required files.
+This Module converts image files to WebP format.
+-------------------------------
+Changelog
+-------------------------------
+version 1: directory under test contains 119 images and takes roughly 43 seconds to convert. 
+version 2: directory under test contains 119 images and takes roughly 33 seconds to convert. 
+
+Note: THE TIME TAKEN TO CONVERT CAN VARY BASED UPON THE FORMAT OF IMAGE PRESENT IN MAJORITY
 -------------------------------
 Important Notes
 -------------------------------
-
+set_time_limit used extend time limit to 120s
+all functions have been reduced to single function to reduce execution time
 =========================================================*/
-//function that reads xml file and returns array of SimpleXMLObjects
-function wpo_read($dir) {
+include('header.php'); 
+
+//the old main function
+function wpo_webp_main_old($dir) {
 	$xml = simplexml_load_file($dir); // load the xml file
-	$list = array(); // create an empty array for SimpleXMLObjects
-	$list = array_merge($list, $xml->xpath("/wpo/file")); // add paths of files to $list array
-	return $list; //return the array
-}
-
-//function to add the weppy.js fille to all files listed in add-weppy.xml file
-function wpo_addweppy() {
-	return 1;
-}
-
-//function to replace local image extensions with .webp extension
-function wpo_replace_links() {
-	return 1;
-}
-
-//function to convert given image to webp
-function wpo_webp($source, $destination) {
-	exec("cwebp ".$source." -o ".$destination. " -q 80"); // execute external command cwebp
-}
-
-//the main function
-function wpo_webp_main($dir) {
-	wpo_addweppy(); // function to add the weppy.js fille to all files listed in add-weppy.xml file
-	$wp_list = wpo_read($dir); // array with SimpleXMLObjects in XML file
+	$wp_list = array(); // create an empty array for SimpleXMLObjects
+	$wp_list = array_merge($wp_list, $xml->xpath("/wpo/file")); // add paths of files to $list array
 	foreach($wp_list as $value) {
 		$path = str_replace("..", "out", $value->path);// path to destination file in "out" folder 
-		unlink($path); //delete unconverted image file in out folder
+		unlink($path); //delete unconverted image file in "out" folder
 		$path = str_replace(pathinfo($path, PATHINFO_EXTENSION), "webp", $path); // prepeare destination file with .webp extension
-		wpo_webp($value->path, $path);
+		exec("cwebp ".$value->path." -o ".$path. " -q 80"); // execute external command cwebp to convert given image to webp
 	}
-	wpo_replace_links(); //function to replace local image extensions with .webp extension
 }
+
+//the new main function - faster conversion
+function wpo_webp_main($dir) {
+	$xml = simplexml_load_file($dir); // load the xml file
+	$wp_list = array(); // create an empty array for SimpleXMLObjects
+	$wp_list = array_merge($wp_list, $xml->xpath("/wpo/file")); // add paths of files to $list array
+	foreach($wp_list as $value) {
+		$path = str_replace("..", "out", $value->path);// path to destination file in "out" folder 
+		unlink($path); //delete unconverted image file in "out" folder
+		$path = str_replace(pathinfo($path, PATHINFO_EXTENSION), "webp", $path); // prepeare destination file with .webp extension
+		/*let php - GD function handle jpg conversions */
+		if(((pathinfo($value->path, PATHINFO_EXTENSION)) == "jpg")||((pathinfo($value->path, PATHINFO_EXTENSION)) == "jpeg")) {
+			imagewebp(imagecreatefromjpeg($value->path), $path);
+		}
+		/*cwebp tool handles png/gif conversions to preserve transparency and smoothness*/
+		else { 
+			exec("cwebp ".$value->path." -o ".$path. " -q 80"); // execute external command cwebp to convert given image to webp
+		}
+	}
+}
+
+//extending execution time limit 
+set_time_limit (120);
+//calling main function
+wpo_webp_main("temp/img.xml");
 ?>
+<div class="button" style="float:right;"><a href="wpo-wp2.php">Proceed to Next Step</a></div>
+<?php include('footer.php'); ?>
