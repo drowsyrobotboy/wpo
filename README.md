@@ -1,6 +1,7 @@
 #The Web Performance Optimization Kit
 
 ---
+## Now Compatible only with Windows. Will release for other OS's once stable version is reached.
 
 ### What?
 Web Performance Optimization Kit is a collection of tools that aims on automating the process of optimizing a web project.
@@ -20,6 +21,7 @@ Web Performance Optimization Kit is a collection of tools that aims on automatin
 
 
 ### Dependencies
+- Windows OS
 - Apache Web Server
 - PHP 5.5.x
 
