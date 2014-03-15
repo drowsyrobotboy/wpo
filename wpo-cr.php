@@ -45,7 +45,9 @@ function wpo_reorg($dir) {
 	$list = wpo_read($dir); // array with SimpleXMLObjects in XML file
 	foreach($list as $value) {
 		$path = str_replace("..", "out", $value->path);// path to destination file in "out" folder 
-		wpo_remcomments($path); //remove comments
+		if (!strstr($path,"jquery")) { //escape Jquery to avoid inconsistency
+			wpo_remcomments($path); //remove comments
+		}
 		if ($dir == "temp/php.xml"){return 1;} //do not remove blank spaces for php files
 		else { wpo_remspaces($path);} //remove blank spaces for other files
 	}

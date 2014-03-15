@@ -25,3 +25,4 @@ Web Performance Optimization Kit is a collection of tools that aims on automatin
 
 ### ToDo
 - out_chrome
+- fix jquery comments bug
