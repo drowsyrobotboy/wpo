@@ -47,9 +47,15 @@ function wpo_reorg($dir) {
 		$path = str_replace("..", "out", $value->path);// path to destination file in "out" folder 
 		if (!strstr($path,"jquery")) { //escape Jquery to avoid inconsistency
 			wpo_remcomments($path); //remove comments
+			if ($dir == "temp/php.xml"){return 1;} //do not remove blank spaces for php files
+			else { wpo_remspaces($path);} //remove blank spaces for other files
 		}
-		if ($dir == "temp/php.xml"){return 1;} //do not remove blank spaces for php files
-		else { wpo_remspaces($path);} //remove blank spaces for other files
+		$path = str_replace("..", "out_chrome", $value->path);// path to destination file in "out_chrome" folder 
+		if (!strstr($path,"jquery")) { //escape Jquery to avoid inconsistency
+			wpo_remcomments($path); //remove comments
+			if ($dir == "temp/php.xml"){return 1;} //do not remove blank spaces for php files
+			else { wpo_remspaces($path);} //remove blank spaces for other files
+		}
 	}
 }
 
@@ -58,5 +64,5 @@ wpo_reorg("temp/php.xml");
 wpo_reorg("temp/js.xml");
 wpo_reorg("temp/css.xml");
 ?>
-<div class="button" style="float:right;"><a href="wpo-wp.php">Proceed to Next Step</a></div>
+<div class="button" style="float:right;"><a href="wpo-io.php">Proceed to Next Step</a></div>
 <?php include('footer.php'); ?>
