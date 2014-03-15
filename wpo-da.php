@@ -103,7 +103,7 @@ function wpo_detect_jpg_image($path,$xml_path) {
 	$contents = preg_replace('/\s+/', ' ', $contents); //removes whitespaces, tabs, and newlines
 	$list = explode(" ",$contents); //insert each string as an item in a new array 
 	foreach( $list as $list_item) {
-		if(((wpo_ext($list_item)=="jpg")||(wpo_ext($list_item)=="jpeg"))&&(preg_match("/^(http|https|ftp|ftps)\:\/\/*/", $list_item)==0))
+		if(((wpo_ext($list_item)=="jpg")||(wpo_ext($list_item)=="jpeg")||(wpo_ext($list_item)=="png")||(wpo_ext($list_item)=="gif"))&&(preg_match("/^(http|https|ftp|ftps)\:\/\/*/", $list_item)==0))
 		{
 		//the above condition satisfies if the string is a reference to a local image
 		file_put_contents($xml_path,"\t\t<rname>".$list_item."</rname>\n", FILE_APPEND);
