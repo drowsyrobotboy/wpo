@@ -58,8 +58,14 @@ function wpo_initial($dir) {
 		die("<h1>Error in creating output folder</h1>");
 	}
 	
+	//creating the "out_chrome" directory to store output files through out the process (specialized for Google Chrome)
+	if(!mkdir("out_chrome")) {
+		die("<h1>Error in creating output folder</h1>");
+	}
+	
 	//calling subfolders function
 	wpo_initialsub($dir);
+	wpo_initialsub2($dir);
 	
 }
 
@@ -76,6 +82,18 @@ function wpo_initialsub($dir){
 	}
 }
 
+//creating initial subfolders for out_chrome
+function wpo_initialsub2($dir){
+	foreach (glob($dir.'/*') as $value) {
+		if((is_dir($value))&&($value!="../wpo")){
+			$new_value = str_replace("..", "out_chrome", $value);
+			if(!mkdir($new_value)) {
+				die("<h1>Error in creating".$new_value."folder</h1>");
+			}
+			wpo_initialsub2($value);
+		}
+	}
+}
 //function to detect images in a file and add it to its XML tag. Cannot simply replace .jpg with .webp because the files may include hyperlinks which won't work after making them .webp. It also returns the count using which the calling func adds the file to add-webpjs.xml.
 function wpo_detect_jpg_image($path,$xml_path) {
 	$no_jpg_images=0;
@@ -110,6 +128,9 @@ function wpo_files($dir,$param2) {
 		// copy to out folder
 		$destination = str_replace("..", "out", $filename);
 		if(!copy($filename,$destination)) { die ("error in copying to output folder");}
+		// copy to out_chrome folder
+		$destination = str_replace("..", "out_chrome", $filename);
+		if(!copy($filename,$destination)) { die ("error in copying to output folder");}
 		
 		//add to xml files
 		file_put_contents("temp/php.xml","<file>\n\t<path>".$filename."</path>\n\t<size>".filesize($filename)."</size>\n\t<rlist>\n", FILE_APPEND);
@@ -129,6 +150,10 @@ function wpo_files($dir,$param2) {
 		$destination = str_replace("..", "out", $filename);
 		if(!copy($filename,$destination)) { die ("error in copying to output folder");}
 		
+		// copy to out_chrome folder
+		$destination = str_replace("..", "out_chrome", $filename);
+		if(!copy($filename,$destination)) { die ("error in copying to output folder");}
+		
 		//add to xml file
 		file_put_contents("temp/js.xml","<file>\n\t<path>".$filename."</path>\n\t<size>".filesize($filename)."</size>\n\t<rlist>\n", FILE_APPEND);
 		$no = wpo_detect_jpg_image($filename,"temp/js.xml");
@@ -146,6 +171,10 @@ function wpo_files($dir,$param2) {
 		$destination = str_replace("..", "out", $filename);
 		if(!copy($filename,$destination)) { die ("error in copying to output folder");}
 		
+		// copy to out_chrome folder
+		$destination = str_replace("..", "out_chrome", $filename);
+		if(!copy($filename,$destination)) { die ("error in copying to output folder");}
+		
 		//add to xml file
 		file_put_contents("temp/css.xml","<file>\n\t<path>".$filename."</path>\n\t<size>".filesize($filename)."</size>\n\t<rlist>\n", FILE_APPEND);
 		$no = wpo_detect_jpg_image($filename,"temp/css.xml");
@@ -161,6 +190,10 @@ function wpo_files($dir,$param2) {
 		echo "<tr class='da-file'><td>$filename</td><td>" . filesize($filename) . "</td></tr>";
 		// copy to out folder
 		$destination = str_replace("..", "out", $filename);
+		if(!copy($filename,$destination)) { die ("error in copying to output folder");}
+		
+		// copy to out_chrome folder
+		$destination = str_replace("..", "out_chrome", $filename);
 		if(!copy($filename,$destination)) { die ("error in copying to output folder");}
 		
 		//add to xml files
@@ -181,6 +214,10 @@ function wpo_files($dir,$param2) {
 		$destination = str_replace("..", "out", $filename);
 		if(!copy($filename,$destination)) { die ("error in copying to output folder");}
 		
+		// copy to out_chrome folder
+		$destination = str_replace("..", "out_chrome", $filename);
+		if(!copy($filename,$destination)) { die ("error in copying to output folder");}
+		
 		//add to xml file
 		file_put_contents("temp/img.xml","<file>\n\t<path>".$filename."</path>\n\t<size>".filesize($filename)."</size>\n</file>\n", FILE_APPEND);
 		}
@@ -194,7 +231,11 @@ function wpo_files($dir,$param2) {
 			// copy to out folder
 			$destination = str_replace("..", "out", $filename);
 			if(!copy($filename,$destination)) { die ("error in copying to output folder");}
-		
+			
+			// copy to out_chrome folder
+			$destination = str_replace("..", "out_chrome", $filename);
+			if(!copy($filename,$destination)) { die ("error in copying to output folder");}
+			
 			//add to xml file
 			file_put_contents("temp/exclude.xml","<file>\n\t<path>".$filename."</path>\n\t<size>".filesize($filename)."</size>\n\t<rlist>\n", FILE_APPEND);
 			$no = wpo_detect_jpg_image($filename,"temp/exclude.xml");
