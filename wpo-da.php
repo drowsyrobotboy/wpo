@@ -9,6 +9,7 @@ This Module handles identification of files and creating wpo_temmp folder with p
 changelog
 -------------------------------
 - adds all php and html files to add-webpjs.xml by default (even if they dont have images)
+- do not convert png/gif files
 -------------------------------
 Important Notes
 -------------------------------
@@ -267,6 +268,7 @@ function wpo_dir($dir,$param2) {
 </table>
 
 <br /><br />
+
 <!-- close XML files -->
 <?php wpo_closeXMLs(); ?>
 

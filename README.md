@@ -23,3 +23,5 @@ Web Performance Optimization Kit is a collection of tools that aims on automatin
 - Apache Web Server
 - PHP 5.5.x
 
+### ToDo
+- out_chrome
