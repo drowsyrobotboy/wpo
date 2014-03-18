@@ -41,5 +41,5 @@ set_time_limit (120);
 //calling main function
 wpo_webp_main("temp/img.xml");
 ?>
-<div class="button" style="float:right;"><a href="wpo-io4.php">Proceed to Next Step</a></div>
+<div class="button" style="float:right;"><a href="#">Done!</a></div>
 <?php include('footer.php'); ?>
