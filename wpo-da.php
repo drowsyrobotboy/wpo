@@ -314,5 +314,4 @@ function wpo_dir($dir,$param2) {
 <?php wpo_closeXMLs(); ?>
 
 <div class="button" style="float:right;"><a href="wpo-cr.php">Proceed to Next Step</a></div>
-
 <?php  include('footer.php'); ?>

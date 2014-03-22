@@ -25,10 +25,12 @@ function wpo_webp_main($dir) {
 	$wp_list = array(); // create an empty array for SimpleXMLObjects
 	$wp_list = array_merge($wp_list, $xml->xpath("/wpo/file")); // add paths of files to $list array
 	foreach($wp_list as $value) {
+		file_put_contents("temp/console.log","Starting to convert".$value->path." ...<br />", FILE_APPEND);
 		$path = str_replace("..", "out_chrome", $value->path);// path to destination file in "out_chrome" folder 
 		unlink($path); //delete unconverted image file in "out_chrome" folder
 		$path = str_replace(pathinfo($path, PATHINFO_EXTENSION), "webp", $path); // prepeare destination file with .webp extension
 		exec("cd bin && cwebp ../".$value->path." -o ../".$path. " -q 80"); // execute external command cwebp to convert given image to webp
+		file_put_contents("temp/console.log","Successfully converted".$value->path." !<br />", FILE_APPEND);
 	}
 }
 
