@@ -22,7 +22,48 @@ param2 in wpo_detect() method uses the following values to detect a particular t
 5-Images
 6-Other files
 =========================================================*/
+?>
 
+<html>
+    <head>
+        <style>
+            body {
+             font-family: monospace;
+             color: #555;
+             padding:10px;
+            }
+            h2 {
+                font-weight: 300;
+                font-size:18px;
+            }
+            h4 {
+                font-weight: 200;
+                font-size:16px;
+            }
+            .da-table {
+              background: #ddd;
+            }
+
+            .da-header td {
+              background: #2990e2;
+            }
+
+            .da-folder td {
+                background: #73b4e8;
+            }
+
+            .da-folder td h4 {
+              padding: 0px;
+                margin:0px;
+            }
+
+            .da-file td {
+              background: #efefef;
+            }    
+        </style>
+    </head>
+<body>
+<?php
 //function to create all XML files and open root element
 function wpo_openXMLs() {
 	file_put_contents("temp/php.xml","<wpo>\n", FILE_APPEND);
@@ -46,7 +87,7 @@ function wpo_closeXMLs() {
 	file_put_contents("temp/exclude.xml","</wpo>", FILE_APPEND);
 	file_put_contents("temp/add-webpjs.xml","</wpo>", FILE_APPEND);
     //add to log
-    file_put_contents("temp/da.log","CLosed XML files <br />", FILE_APPEND);
+    file_put_contents("temp/da.log","Closed XML files <br />", FILE_APPEND);
 }
 
 function wpo_initial($dir) {
@@ -344,7 +385,8 @@ file_put_contents("temp/da.log","Copied and listed all other files <br />", FILE
 <!-- close XML files -->
 <?php wpo_closeXMLs(); 
 //add to log
-file_put_contents("temp/da.log","Done! Kindly Check the PHP output below for result of the analysis before proceeding to next step.", FILE_APPEND);  
+file_put_contents("temp/da.log","Done! Kindly Check the PHP output below for result of the analysis before proceeding to next step.", FILE_APPEND); 
 ?>
-
+</body>
+</html>
 

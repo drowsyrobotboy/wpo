@@ -13,7 +13,6 @@ Important Notes
 set_time_limit used extend time limit to 120s
 all functions have been reduced to single function to reduce execution time
 =========================================================*/
-include('header.php'); 
 
 //the new main function - faster conversion
 function wpo_webp_main($dir) {
@@ -25,6 +24,8 @@ function wpo_webp_main($dir) {
 		if(((pathinfo($value->path, PATHINFO_EXTENSION)) == "jpg")||((pathinfo($value->path, PATHINFO_EXTENSION)) == "jpeg")) {
 			unlink($path); //delete unconverted jpg image file in "out" folder
 			imagejpeg(imagecreatefromjpeg($value->path), $path, 70);
+            /* Prinitng status to log file*/
+            file_put_contents("temp/io3.log", "Successfully converted".$value->path." !<br />", FILE_APPEND);
 		}
 		else if((pathinfo($value->path, PATHINFO_EXTENSION)) == "png") {
 			unlink($path); //delete unconverted png image file in "out" folder
@@ -32,6 +33,8 @@ function wpo_webp_main($dir) {
 			imagealphablending($png, false);
 			imagesavealpha($png, true);  
 			imagepng($png,$path,9);
+            /* Prinitng status to log file*/
+            file_put_contents("temp/io3.log", "Successfully converted".$value->path." !<br />", FILE_APPEND);
 		}
 	}
 }
@@ -40,4 +43,5 @@ function wpo_webp_main($dir) {
 set_time_limit (120);
 //calling main function
 wpo_webp_main("temp/img.xml");
+file_put_contents("temp/io3.log", "Done!", FILE_APPEND);
 ?>

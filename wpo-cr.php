@@ -57,8 +57,17 @@ function wpo_reorg($dir) {
 	}
 }
 
+//add to log
+file_put_contents("temp/cr.log","Initializing Code Reorganization Module <br/>", FILE_APPEND);
 //calling XML files for reorganisation
 wpo_reorg("temp/php.xml"); 
+//add to log
+file_put_contents("temp/cr.log","Reorganized all PHP files <br />", FILE_APPEND);
 wpo_reorg("temp/js.xml");
+//add to log
+file_put_contents("temp/cr.log","Reorganized all JS files <br />", FILE_APPEND);
 wpo_reorg("temp/css.xml");
+//add to log
+file_put_contents("temp/cr.log","Reorganized all CSS files <br />", FILE_APPEND);
+file_put_contents("temp/cr.log","Done! Kindly proceed to next step. <br />", FILE_APPEND); 
 ?>

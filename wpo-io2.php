@@ -37,10 +37,22 @@ function wpo_replace_links($dir) {
 		}
 	}
 }
-
+//add to log
+file_put_contents("temp/io2.log","Initializing replacement process <br/>", FILE_APPEND);
 wpo_replace_links("temp/php.xml"); // now replace resource references in all php files
+//add to log
+file_put_contents("temp/io2.log","Replaced image links in all PHP files <br/>", FILE_APPEND);
 wpo_replace_links("temp/html.xml"); // now replace resource references in all html files
+//add to log
+file_put_contents("temp/io2.log","Replaced image links in all HTML files <br/>", FILE_APPEND);
 wpo_replace_links("temp/css.xml"); // now replace resource references in all css files
-wpo_replace_links("temp/js.xml"); // now replace resource references in all php files
+//add to log
+file_put_contents("temp/io2.log","Replaced image links in all CSS files <br/>", FILE_APPEND);
+wpo_replace_links("temp/js.xml"); // now replace resource references in all js files
+//add to log
+file_put_contents("temp/io2.log","Replaced image links in all JS files <br/>", FILE_APPEND);
 wpo_replace_links("temp/exclude.xml"); // now replace resource references in all excluded files
+//add to log
+file_put_contents("temp/io2.log","Replaced image links in all other files <br/>", FILE_APPEND);
+file_put_contents("temp/io2.log","Done! Kindly proceed to next step. <br />", FILE_APPEND);
 ?>

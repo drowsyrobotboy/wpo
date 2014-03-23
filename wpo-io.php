@@ -28,8 +28,8 @@ function wpo_webp_main($dir) {
 		unlink($path); //delete unconverted image file in "out_chrome" folder
 		$path = str_replace(pathinfo($path, PATHINFO_EXTENSION), "webp", $path); // prepeare destination file with .webp extension
 		exec("cd bin && cwebp ../".$value->path." -o ../".$path. " -q 80"); // execute external command cwebp to convert given image to webp
-		/* Prinitng status to output console*/
-        file_put_contents("temp/console.log", "Successfully converted".$value->path." !<br />", FILE_APPEND);
+		/* Prinitng status to log file*/
+        file_put_contents("temp/io.log", "Successfully converted".$value->path." !<br />", FILE_APPEND);
 	}
 }
 
@@ -37,6 +37,6 @@ function wpo_webp_main($dir) {
 set_time_limit (120);
 //calling main function
 wpo_webp_main("temp/img.xml");
-file_put_contents("temp/console.log", "Done!", FILE_APPEND);
+file_put_contents("temp/io.log", "Done!", FILE_APPEND);
 ?>
 
