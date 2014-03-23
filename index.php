@@ -34,9 +34,11 @@
             </tr>
         </table>
         <div class="button"><a href="wpo-da.php" target="phpOut" onclick="wpo_da_out()" >Start Optimizing</a></div>
+        <div class="button2"><a href="#" onclick="show_php_out()" >Show PHP Output</a></div>
     </div>
         <br /><br />
         <iframe id="phpFrame" name="phpOut" width="100%" frameborder="0"></iframe>
+        <div style="text-align:center;margin-top:10px;color:#2990e2;">Web Performance Optimization Kit is a project by P. Maruthi Sharma, N. Bharadwaz and P. Abhijith</div>
     </div>
     <script type="text/javascript">
         //tokens to control setinterval and clearinterval functions based on respective boolean values
@@ -107,6 +109,14 @@
             $('#item-io2').css({'background':'#2990e2','color':'#efefef'});
             $('.button').html('<a href="#">View Optimization Results!</a>');
 	       }
+        function show_php_out() {
+            $('#phpFrame').fadeIn(500);
+            $('.button2').html('<a href="#" onclick="hide_php_out()" >Hide PHP Output</a>');
+        }
+        function hide_php_out() {
+            $('#phpFrame').fadeOut(500);
+            $('.button2').html('<a href="#" onclick="show_php_out()" >Show PHP Output</a>');
+        }
     </script>
 </body>
 </html>
