@@ -38,7 +38,10 @@
     </div>
         <br /><br />
         <iframe id="phpFrame" name="phpOut" width="100%" frameborder="0"></iframe>
-        <div style="text-align:center;margin-top:10px;color:#2990e2;">Web Performance Optimization Kit is a project by P. Maruthi Sharma, N. Bharadwaz and P. Abhijith</div>
+        <div style="text-align:center;margin-top:10px;color:#2990e2;">
+            <i>Note: After you start, please do not proceed to next step till you see a "Done!" message.</i><br />
+            Web Performance Optimization Kit is a project by P. Maruthi Sharma, N. Bharadwaz and P. Abhijith
+        </div>
     </div>
     <script type="text/javascript">
         //tokens to control setinterval and clearinterval functions based on respective boolean values
@@ -105,8 +108,8 @@
                     clearInterval(io3_timer);
                 }
             },10);
-            $('#item-io').css({'background':'#ededed','color':'#2990e2'});
-            $('#item-io2').css({'background':'#2990e2','color':'#efefef'});
+            $('#item-io2').css({'background':'#ededed','color':'#2990e2'});
+            $('#item-io3').css({'background':'#2990e2','color':'#efefef'});
             $('.button').html('<a href="#">View Optimization Results!</a>');
 	       }
         function show_php_out() {

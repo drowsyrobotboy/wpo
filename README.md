@@ -16,6 +16,8 @@ Web Performance Optimization Kit is a collection of tools that aims on automatin
 - Directory Analysis Module
 - Code Optimization Module
 - Image Optimization Module (earlier WebP Implementation Module)
+    - Optimization for Chrome (using WebP Implementation)
+    - Optimizing for all browsers (using Image optimization techniques)
 - Temporary Data Storage Module
 
 
@@ -26,4 +28,4 @@ Web Performance Optimization Kit is a collection of tools that aims on automatin
 ### How to Use:
 - Copy the "wpo" folder into the root directory of your Web Site.
 - Navigate to the /wpo folder of your website in a browser.
-- Follow the instructions thereafter.
+- Follow the instructions on our wonderful UI.
