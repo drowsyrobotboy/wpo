@@ -17,7 +17,6 @@ Important Notes
 set_time_limit used extend time limit to 120s
 all functions have been reduced to single function to reduce execution time
 =========================================================*/
-include('header.php'); 
 
 //the main function
 function wpo_webp_main($dir) {
@@ -39,5 +38,4 @@ set_time_limit (120);
 //calling main function
 wpo_webp_main("temp/img.xml");
 ?>
-<div class="button" style="float:right;"><a href="wpo-io2.php">Proceed to Next Step</a></div>
-<?php include('footer.php'); ?>
+

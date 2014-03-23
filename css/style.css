@@ -3,7 +3,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background: #eee;
+  background: #eee url('../images/bg.png');
   color: #555;
 }
 
@@ -18,6 +18,7 @@ body {
 }
 
 .content {
+  border-top: 5px solid #29abe2;
   background: #efefef;
   -webkit-box-shadow: 0 0 3px #bbb;
   box-shadow: 0 0 3px #bbb;
@@ -25,10 +26,32 @@ body {
 }
 
 .button a {
-  background: #90A30C;
+    background: #29abe2; /* Old browsers */
+    background: -moz-linear-gradient(top,  #29abe2 0%, #2990e2 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#29abe2), color-stop(100%,#2990e2)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #29abe2 0%,#2990e2 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #29abe2 0%,#2990e2 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #29abe2 0%,#2990e2 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #29abe2 0%,#2990e2 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#29abe2', endColorstr='#2990e2',GradientType=0 ); /* IE6-9 */
+  border: solid 2px #ededed;
+  -webkit-box-shadow: 0 0 5px #aaa;
+  box-shadow: 0 0 5px #aaa;
+  -webkit-border-radius: 25px;
+  border-radius: 25px;
   color: #efefef;
   text-decoration: none;
   padding: 10px 20px;
+  -webkit-transition: all 0.8s ease-in-out;  /* Chrome 1-25, Safari 3.2+ */
+  -moz-transition: all 0.8s ease-in-out;  /* Firefox 4-15 */
+  -o-transition: all 0.8s ease-in-out;  /* Opera 10.50–12.00 */
+  transition: all 0.8s ease-in-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
+}
+.button a:hover {
+    background: #2990e2;
+    border: solid 2px #2990e2;
+    -webkit-box-shadow: 0 0 5px #efefef;
+    box-shadow: 0 0 5px #efefef;
 }
 
 .da-table {

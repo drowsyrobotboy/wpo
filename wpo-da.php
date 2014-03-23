@@ -23,8 +23,6 @@ param2 in wpo_detect() method uses the following values to detect a particular t
 6-Other files
 =========================================================*/
 
-include('header.php');
-
 //function to create all XML files and open root element
 function wpo_openXMLs() {
 	file_put_contents("temp/php.xml","<wpo>\n", FILE_APPEND);
@@ -313,5 +311,4 @@ function wpo_dir($dir,$param2) {
 <!-- close XML files -->
 <?php wpo_closeXMLs(); ?>
 
-<div class="button" style="float:right;"><a href="wpo-cr.php">Proceed to Next Step</a></div>
-<?php  include('footer.php'); ?>
+

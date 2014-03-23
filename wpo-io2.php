@@ -9,7 +9,6 @@ Important Notes
 -------------------------------
 
 =========================================================*/
-include('header.php'); 
 
 //function that reads xml file and returns array of SimpleXMLObjects
 function wpo_read($dir) {
@@ -43,8 +42,4 @@ wpo_replace_links("temp/php.xml"); // now replace resource references in all php
 wpo_replace_links("temp/html.xml"); // now replace resource references in all html files
 wpo_replace_links("temp/css.xml"); // now replace resource references in all css files
 wpo_replace_links("temp/js.xml"); // now replace resource references in all php files
-?>
-<div class="button" style="float:right;"><a href="wpo-io3.php">Proceed to Next Step</a></div>
-<?php
-include('footer.php'); 
 ?>
