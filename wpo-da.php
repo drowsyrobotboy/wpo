@@ -32,6 +32,8 @@ function wpo_openXMLs() {
 	file_put_contents("temp/img.xml","<wpo>\n", FILE_APPEND);
 	file_put_contents("temp/exclude.xml","<wpo>\n", FILE_APPEND);
 	file_put_contents("temp/add-webpjs.xml","<wpo>\n", FILE_APPEND);
+    //add to log
+    file_put_contents("temp/da.log","Initialized XML files for storage <br />", FILE_APPEND);
 }
 
 //function to close root element in all XML files
@@ -43,6 +45,8 @@ function wpo_closeXMLs() {
 	file_put_contents("temp/img.xml","</wpo>", FILE_APPEND);
 	file_put_contents("temp/exclude.xml","</wpo>", FILE_APPEND);
 	file_put_contents("temp/add-webpjs.xml","</wpo>", FILE_APPEND);
+    //add to log
+    file_put_contents("temp/da.log","CLosed XML files <br />", FILE_APPEND);
 }
 
 function wpo_initial($dir) {
@@ -50,17 +54,20 @@ function wpo_initial($dir) {
 	if(!mkdir("temp")) {
 		die("<h1>Error in creating Temporary Storage Module</h1>");
 	}
-
+    //add to log
+    file_put_contents("temp/da.log","Created 'temp' directory <br />", FILE_APPEND);
 	//creating the "out" directory to store output files through out the process
 	if(!mkdir("out")) {
 		die("<h1>Error in creating output folder</h1>");
 	}
-	
+	//add to log
+    file_put_contents("temp/da.log","Created 'out' directory <br />", FILE_APPEND);
 	//creating the "out_chrome" directory to store output files through out the process (specialized for Google Chrome)
 	if(!mkdir("out_chrome")) {
 		die("<h1>Error in creating output folder</h1>");
 	}
-	
+	//add to log
+    file_put_contents("temp/da.log","Created 'out_chrome' directory <br />", FILE_APPEND);
 	//calling subfolders function
 	wpo_initialsub($dir);
 	wpo_initialsub2($dir);
@@ -75,6 +82,8 @@ function wpo_initialsub($dir){
 			if(!mkdir($new_value)) {
 				die("<h1>Error in creating".$new_value."folder</h1>");
 			}
+            //add to log
+            file_put_contents("temp/da.log","Created ".$new_value." directory <br />", FILE_APPEND);
 			wpo_initialsub($value);
 		}
 	}
@@ -88,6 +97,8 @@ function wpo_initialsub2($dir){
 			if(!mkdir($new_value)) {
 				die("<h1>Error in creating".$new_value."folder</h1>");
 			}
+            //add to log
+            file_put_contents("temp/da.log","Created ".$new_value." directory <br />", FILE_APPEND);
 			wpo_initialsub2($value);
 		}
 	}
@@ -258,8 +269,12 @@ function wpo_dir($dir,$param2) {
 }
 
 ?>
-<!-- Create initial directories -->
-<?php wpo_initial(".."); ?>
+<?php 
+//extending execution time limit 
+set_time_limit (120);
+//create initial directories 
+wpo_initial(".."); 
+?>
 
 <!-- Create XML files -->
 <?php wpo_openXMLs(); ?>
@@ -268,47 +283,68 @@ function wpo_dir($dir,$param2) {
 <h2>The following HTML files will be Optimized</h2>
 <table class="da-table" width="100%" cellpadding="10px">
 <tr class='da-header'><td>Filename</td><td>File Size (in Bytes) </td></tr>
-<?php wpo_files("..",4); ?>
+<?php wpo_files("..",4); 
+//add to log
+file_put_contents("temp/da.log","Copied and listed all HTML files <br />", FILE_APPEND);    
+?>
 </table>
 
 <!-- Listing all PHP files-->
 <h2>The following PHP files will be Optimized</h2>
 <table class="da-table" width="100%" cellpadding="10px">
 <tr class='da-header'><td>Filename</td><td>File Size (in Bytes) </td></tr>
-<?php wpo_files("..",1); ?>
+<?php wpo_files("..",1); 
+//add to log
+file_put_contents("temp/da.log","Copied and listed all PHP files <br />", FILE_APPEND);  
+?>
 </table>
 
 <!-- Listing all JS files-->
 <h2>The following JS files will be Optimized</h2>
 <table class="da-table" width="100%" cellpadding="10px">
 <tr class='da-header'><td>Filename</td><td>File Size (in Bytes) </td></tr>
-<?php wpo_files("..",2); ?>
+<?php wpo_files("..",2);  
+//add to log
+file_put_contents("temp/da.log","Copied and listed all JS files <br />", FILE_APPEND);  
+?>
 </table>
 
 <!-- Listing all CSS files-->
 <h2>The following CSS files will be Optimized</h2>
 <table class="da-table" width="100%" cellpadding="10px">
 <tr class='da-header'><td>Filename</td><td>File Size (in Bytes) </td></tr>
-<?php wpo_files("..",3); ?>
+<?php wpo_files("..",3);  
+//add to log
+file_put_contents("temp/da.log","Copied and listed all CSS files <br />", FILE_APPEND);  
+?>
 </table>
 
 <!-- Listing all Images-->
 <h2>The following Images will be Optimized</h2>
 <table class="da-table" width="100%" cellpadding="10px">
 <tr class='da-header'><td>Filename</td><td>File Size (in Bytes) </td></tr>
-<?php wpo_files("..",5); ?>
+<?php wpo_files("..",5);  
+//add to log
+file_put_contents("temp/da.log","Copied and listed all Images <br />", FILE_APPEND);  
+?>
 </table>
 
 <!-- Listing all Other files-->
 <h2>The following files will NOT be Optimized</h2>
 <table class="da-table" width="100%" cellpadding="10px">
 <tr class='da-header'><td>Filename</td><td>File Size (in Bytes) </td></tr>
-<?php wpo_files("..",6); ?>
+<?php wpo_files("..",6); 
+ //add to log
+file_put_contents("temp/da.log","Copied and listed all other files <br />", FILE_APPEND);  
+?>
 </table>
 
 <br /><br />
 
 <!-- close XML files -->
-<?php wpo_closeXMLs(); ?>
+<?php wpo_closeXMLs(); 
+//add to log
+file_put_contents("temp/da.log","Done! Kindly Check the PHP output below for result of the analysis before proceeding to next step.", FILE_APPEND);  
+?>
 
 

@@ -42,4 +42,5 @@ wpo_replace_links("temp/php.xml"); // now replace resource references in all php
 wpo_replace_links("temp/html.xml"); // now replace resource references in all html files
 wpo_replace_links("temp/css.xml"); // now replace resource references in all css files
 wpo_replace_links("temp/js.xml"); // now replace resource references in all php files
+wpo_replace_links("temp/exclude.xml"); // now replace resource references in all excluded files
 ?>

@@ -11,10 +11,8 @@
 <script type="text/javascript">
 	window.onload=function(){
 		setInterval(function(){
-			$('#console').load('temp/console.log');
-			
-		}
-		,10);
+            $('#console').load('temp/console.log');
+    	},10);
 	}
 </script>
 </body>

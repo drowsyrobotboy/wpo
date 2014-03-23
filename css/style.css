@@ -22,9 +22,17 @@ body {
   background: #efefef;
   -webkit-box-shadow: 0 0 3px #bbb;
   box-shadow: 0 0 3px #bbb;
-  padding: 20px;
 }
-
+#phpFrame {
+  border-top: 5px solid #29abe2;
+  background: #efefef;
+  -webkit-box-shadow: 0 0 3px #bbb;
+  box-shadow: 0 0 3px #bbb;
+}
+.button{
+    float:right;
+    margin:-10px 10px 0px 0px;
+}
 .button a {
     background: #29abe2; /* Old browsers */
     background: -moz-linear-gradient(top,  #29abe2 0%, #2990e2 100%); /* FF3.6+ */
@@ -48,12 +56,35 @@ body {
   transition: all 0.8s ease-in-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
 }
 .button a:hover {
-    background: #2990e2;
+    background: #1b75bc;
     border: solid 2px #2990e2;
     -webkit-box-shadow: 0 0 5px #efefef;
     box-shadow: 0 0 5px #efefef;
 }
-
+.left-menu ul {
+    list-style: none;
+    margin: -3px 0px 0px -43px;
+    display: block;
+}
+.left-menu ul li {
+    display:block;
+    background: #ededed;
+    text-decoration:none;
+    border-bottom: 2px solid #ddd;
+    border-right: 1px solid #ddd;
+    width:250px;
+    padding: 10px;
+    color: #2990e2;
+    -webkit-transition: all 0.8s ease-in-out;  /* Chrome 1-25, Safari 3.2+ */
+    -moz-transition: all 0.8s ease-in-out;  /* Firefox 4-15 */
+    -o-transition: all 0.8s ease-in-out;  /* Opera 10.50–12.00 */
+    transition: all 0.8s ease-in-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
+}
+#output {
+    width:100%;
+    padding:20px;
+    font-family: monospace;
+}
 .da-table {
   background: #ddd;
 }

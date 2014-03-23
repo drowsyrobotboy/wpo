@@ -14,8 +14,6 @@ Important Notes
 
 =========================================================*/
 
-include('header.php'); 
-
 //function that removes comments and replaces with one blank character
 function wpo_remcomments($path) {
 	$contents = file_get_contents($path);
@@ -64,5 +62,3 @@ wpo_reorg("temp/php.xml");
 wpo_reorg("temp/js.xml");
 wpo_reorg("temp/css.xml");
 ?>
-<div class="button" style="float:right;"><a href="wpo-io.php">Proceed to Next Step</a></div>
-<?php include('footer.php'); ?>
