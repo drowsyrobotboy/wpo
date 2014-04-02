@@ -44,7 +44,7 @@
         </div>
     </div>
     <script type="text/javascript">
-        //tokens to control setinterval and clearinterval functions based on respective boolean values
+		//tokens to control setinterval and clearinterval functions based on respective boolean values
         var da_token=true;
         var cr_token=true;
         var io_token=true;
@@ -110,9 +110,29 @@
             },10);
             $('#item-io2').css({'background':'#ededed','color':'#2990e2'});
             $('#item-io3').css({'background':'#2990e2','color':'#efefef'});
-            $('.button').html('<a href="#">View Optimization Results!</a>');
+            $('.button').html('<a href="wpo-res.php" target="phpOut" onclick="wpo_res_out()">View Optimization Results!</a>');
 	       }
+		function wpo_res_out(){
+            io3_token=false; //stop previous timer by setting global variable to false
+            var res_timer = setInterval(function(){
+                $('#output').load('temp/res.log');
+                if(!res_token) {
+                    clearInterval(res_timer);
+                }
+            },10);
+            $('#item-io3').css({'background':'#ededed','color':'#2990e2'});
+            $('#item-res').css({'background':'#2990e2','color':'#efefef'});
+            $('.button').fadeOut();
+	    }
         function show_php_out() {
+            $('#phpFrame').fadeIn(500);
+            $('.button2').html('<a href="#" onclick="hide_php_out()" >Hide PHP Output</a>');
+        }
+        function hide_php_out() {
+            $('#phpFrame').fadeOut(500);
+            $('.button2').html('<a href="#" onclick="show_php_out()" >Show PHP Output</a>');
+        }
+		function show_php_out() {
             $('#phpFrame').fadeIn(500);
             $('.button2').html('<a href="#" onclick="hide_php_out()" >Hide PHP Output</a>');
         }
