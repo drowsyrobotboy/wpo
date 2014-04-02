@@ -1,5 +1,5 @@
 #The Web Performance Optimization Kit
-#### Version 1
+#### Version 1.1
 ---
 
 ### What?
